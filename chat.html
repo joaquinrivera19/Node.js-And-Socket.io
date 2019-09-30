@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+<head>
+    <title>Socket.IO RealTime</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font: 13px Helvetica, Arial; }
+        form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+        form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
+        form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+        #messages { list-style-type: none; margin: 0; padding: 0; }
+        #messages li { padding: 5px 10px; }
+        #messages li:nth-child(odd) { background: #eee; }
+    </style>
+</head>
+<body>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+    </tr>
+  </thead>
+  <tbody id="table_jr">
+  </tbody>
+</table>
+
+<form action="">
+    <input id="m" autocomplete="off" /><button>Send</button>
+</form>
+<script src="//code.jquery.com/jquery-3.2.1.js"></script>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    var socket = io();
+    socket.on('connect', function(data) {
+        socket.emit('joined', 'Hello World from client');
+    });
+
+    $('form').submit(function(){
+
+        var valor_send = $('#m').val();
+
+        socket.emit('chat message', valor_send);
+        
+        
+        var markup = "<tr><td></td><td>" + valor_send + "</td><td>" + valor_send + "</td></tr>";
+
+        $("#table_jr").prepend(markup);
+        //$("#table_jr").append(markup);
+
+        $('#m').val('');
+        return false;
+    });
+
+    socket.on('response_socket', function(data) {
+
+        var markup = "<tr><td></td><td>" + data + "</td><td>" + data + "</td></tr>";
+        $("#table_jr").prepend(markup);
+        //$("#table_jr").append(markup);
+
+    });
+</script>
+</body>
+</html>

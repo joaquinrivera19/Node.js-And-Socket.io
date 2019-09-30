@@ -1,0 +1,25 @@
+{
+  "name": "chat-app",
+  "version": "1.0.0",
+  "description": "Node Js Chat Socket IO Example\r This is a sampe application to demonstrate a sample chat system using NodeJs socket.io programming. The complete explanation and walk through of the code is avilable on my blog - [Node JS Socket IO Chat Example](http://www.devglan.com/node-js/nodejs-chat-socket-io-example)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "jquery": "^3.2.1",
+    "socket.io": "^2.3.0"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/only2dhir/node-socket-example.git"
+  },
+  "bugs": {
+    "url": "https://github.com/only2dhir/node-socket-example/issues"
+  },
+  "homepage": "https://github.com/only2dhir/node-socket-example#readme"
+}
