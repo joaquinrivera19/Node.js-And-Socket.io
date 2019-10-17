@@ -11,10 +11,12 @@ socket.emit('message', "this is a test"); # //sending to sender-client only
 socket.broadcast.emit('message', "this is a test"); # //sending to all clients except sender
 socket.broadcast.to('game').emit('message', 'nice game'); # //sending to all clients in 'game' room(channel) except sender
 socket.to('game').emit('message', 'enjoy the game'); # //sending to sender client, only if they are in 'game' room(channel)
-socket.broadcast.to(socketid).emit('message', 'for your eyes only'); # //sending to individual socketid
+socket.to('game1').to('game2').emit('nice game', "let's play a game (too)"); # // sending to all clients in 'game1' and/or in 'game2' room, except sender
+io.to(`${socketId}`).emit('hey', 'I just met you'); # //sending to individual socketid (private message)
 io.emit('message', "this is a test"); # //sending to all clients, include sender
 io.in('game').emit('message', 'cool game'); # //sending to all clients in 'game' room(channel), include sender
 io.of('myNamespace').emit('message', 'gg'); # //sending to all clients in namespace 'myNamespace', include sender
+io.of('myNamespace').to('room').emit('event', 'message'); # // sending to a specific room in a specific namespace, including sender
 socket.emit(); # //send to all connected clients
 socket.broadcast.emit(); # //send to all connected clients except the one that sent the message
 socket.on(); # //event listener, can be called on client to execute on server
@@ -22,3 +24,13 @@ io.sockets.socket(); # //for emiting to specific clients
 io.sockets.emit(); # //send to all connected clients (same as socket.emit)
 io.sockets.on() ; # //initial connection from a client.
 ```
+
+**Note:** The following events are reserved and should not be used as event names by your application:
+- `error`
+- `connect`
+- `disconnect`
+- `disconnecting`
+- `newListener`
+- `removeListener`
+- `ping`
+- `pong`
